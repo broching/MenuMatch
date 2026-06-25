@@ -1,11 +1,17 @@
 "use client"
 
 import { usePathname } from "next/navigation"
+import { OrganizationSwitcher } from "@clerk/nextjs"
+import { dark } from "@clerk/themes"
+import { useTheme } from "next-themes"
 import { Separator } from "@/components/ui/separator"
 import { SidebarTrigger } from "@/components/ui/sidebar"
 
 function getPageTitle(pathname: string): string {
-  // Handle exact matches first
+  if (pathname.startsWith("/dashboard/menus")) return "Menu Items"
+  if (pathname.startsWith("/dashboard/calendar")) return "Calendar"
+  if (pathname.startsWith("/dashboard/meal-types")) return "Meal Types"
+  if (pathname.startsWith("/dashboard/settings")) return "Settings"
   switch (pathname) {
     case "/dashboard":
       return "Dashboard"
@@ -19,6 +25,9 @@ function getPageTitle(pathname: string): string {
 export function SiteHeader() {
   const pathname = usePathname()
   const pageTitle = getPageTitle(pathname)
+  const { theme } = useTheme()
+
+  const appearance = { baseTheme: theme === "dark" ? dark : undefined }
 
   return (
     <header className="flex h-(--header-height) shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-(--header-height)">
@@ -29,6 +38,14 @@ export function SiteHeader() {
           className="mx-2 data-[orientation=vertical]:h-4"
         />
         <h1 className="text-base font-medium">{pageTitle}</h1>
+        <div className="ml-auto">
+          <OrganizationSwitcher
+            hidePersonal
+            appearance={appearance}
+            afterCreateOrganizationUrl="/dashboard"
+            afterSelectOrganizationUrl="/dashboard"
+          />
+        </div>
       </div>
     </header>
   )

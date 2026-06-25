@@ -36,9 +36,22 @@ http.route({
         });
         break;
       }
-      
 
-      
+      case "organization.created": // intentional fallthrough
+      case "organization.updated":
+        await ctx.runMutation(internal.organizations.upsertFromClerk, {
+          data: event.data as any,
+        });
+        break;
+
+      case "organization.deleted": {
+        const clerkOrgId = (event.data as any).id!;
+        await ctx.runMutation(internal.organizations.deleteFromClerk, {
+          clerkOrgId,
+        });
+        break;
+      }
+
       default:
         console.log("Ignored webhook event", (event as any).type);
     }

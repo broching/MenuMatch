@@ -1,7 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    remotePatterns: [
+      // Convex file storage serves menu item images from the deployment domain.
+      { protocol: "https", hostname: "*.convex.cloud" },
+    ],
+  },
 };
 
 export default nextConfig;

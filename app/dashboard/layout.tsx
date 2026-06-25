@@ -1,6 +1,7 @@
 import { AppSidebar } from "@/app/dashboard/app-sidebar"
 import { SiteHeader } from "@/app/dashboard/site-header"
 import { LoadingBar } from "@/app/dashboard/loading-bar"
+import { OrgGate } from "@/app/dashboard/org-gate"
 import {
   SidebarInset,
   SidebarProvider,
@@ -27,8 +28,8 @@ export default function DashboardLayout({
         <SiteHeader />
         <div className="flex flex-1 flex-col">
           <div className="@container/main flex flex-1 flex-col gap-2">
-            <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-              {children}
+            <div className="flex flex-1 flex-col gap-4 py-4 md:gap-6 md:py-6">
+              <OrgGate>{children}</OrgGate>
             </div>
           </div>
         </div>

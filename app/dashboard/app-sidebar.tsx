@@ -2,27 +2,13 @@
 
 import * as React from "react"
 import {
-  IconCamera,
-  IconChartBar,
+  IconCalendarEvent,
   IconDashboard,
-  IconDatabase,
-  IconMessageCircle,
-  IconFileAi,
-  IconFileDescription,
-  IconFileWord,
-  IconFolder,
-  IconHelp,
-  IconInnerShadowTop,
   IconListDetails,
-  IconReport,
-  IconSearch,
   IconSettings,
-  IconUsers,
-  IconSparkles,
-  IconBrandOpenai,
+  IconToolsKitchen2,
 } from "@tabler/icons-react"
 
-import { NavDocuments } from "@/app/dashboard/nav-documents"
 import { NavMain } from "@/app/dashboard/nav-main"
 import { NavSecondary } from "@/app/dashboard/nav-secondary"
 import { NavUser } from "@/app/dashboard/nav-user"
@@ -36,7 +22,6 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import { ChatMaxingIconColoured } from "@/components/logo"
-import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
 
 const data = {
@@ -47,43 +32,26 @@ const data = {
       icon: IconDashboard,
     },
     {
-      title: "Payment gated",
-      url: "/dashboard/payment-gated",
-      icon: IconSparkles,
+      title: "Menu Items",
+      url: "/dashboard/menus",
+      icon: IconToolsKitchen2,
+    },
+    {
+      title: "Calendar",
+      url: "/dashboard/calendar",
+      icon: IconCalendarEvent,
+    },
+    {
+      title: "Meal Types",
+      url: "/dashboard/meal-types",
+      icon: IconListDetails,
     },
   ],
   navSecondary: [
     {
       title: "Settings",
-      url: "#",
+      url: "/dashboard/settings",
       icon: IconSettings,
-    },
-    {
-      title: "Get Help",
-      url: "#",
-      icon: IconHelp,
-    },
-    {
-      title: "Search",
-      url: "#",
-      icon: IconSearch,
-    },
-  ],
-  documents: [
-    {
-      name: "Data Library",
-      url: "#",
-      icon: IconDatabase,
-    },
-    {
-      name: "Reports",
-      url: "#",
-      icon: IconReport,
-    },
-    {
-      name: "Word Assistant",
-      url: "#",
-      icon: IconFileWord,
     },
   ],
 }
@@ -100,8 +68,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             >
               <Link href="/">
                 <ChatMaxingIconColoured className="!size-6" />
-                <span className="text-base font-semibold">Starter DIY</span>
-                <Badge variant="outline" className="text-muted-foreground  text-xs">Demo</Badge>
+                <span className="text-base font-semibold">MenuMatch</span>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -109,7 +76,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
-        <NavDocuments items={data.documents} />
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
