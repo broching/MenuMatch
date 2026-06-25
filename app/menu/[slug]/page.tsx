@@ -5,6 +5,7 @@ import Image from "next/image"
 import { Playfair_Display } from "next/font/google"
 import { useParams } from "next/navigation"
 import { useQuery } from "convex/react"
+import { useTheme } from "next-themes"
 import {
   CalendarDays,
   ChevronLeft,
@@ -12,6 +13,8 @@ import {
   Clock,
   LocateFixed,
   Loader2,
+  Moon,
+  Sun,
   UtensilsCrossed,
 } from "lucide-react"
 
@@ -53,6 +56,8 @@ export default function PublicMenuPage() {
   const params = useParams<{ slug: string }>()
   const slug = params.slug
 
+  const { resolvedTheme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
   const [now, setNow] = useState(() => new Date())
   // Hero selection: null = follow the live current time.
   const [selectedDate, setSelectedDate] = useState<string | null>(null)
@@ -64,6 +69,7 @@ export default function PublicMenuPage() {
   const [calCurrent, setCalCurrent] = useState(() => new Date())
 
   useEffect(() => {
+    setMounted(true)
     const interval = setInterval(() => setNow(new Date()), 60_000)
     return () => clearInterval(interval)
   }, [])
@@ -283,6 +289,22 @@ export default function PublicMenuPage() {
             >
               <CalendarDays className="size-4" />
             </Button>
+            {mounted && (
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={() =>
+                  setTheme(resolvedTheme === "dark" ? "light" : "dark")
+                }
+                aria-label="Toggle dark mode"
+              >
+                {resolvedTheme === "dark" ? (
+                  <Sun className="size-4" />
+                ) : (
+                  <Moon className="size-4" />
+                )}
+              </Button>
+            )}
           </div>
         </header>
 

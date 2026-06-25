@@ -29,7 +29,7 @@ export default function Home() {
       <FeaturesOne />
       <HowItWorks />
       <Showcase />
-      <section id="pricing" className="scroll-mt-24 py-24 md:py-32">
+      {/* <section id="pricing" className="scroll-mt-24 py-24 md:py-32">
         <div className="mx-auto max-w-6xl px-6">
           <div className="mx-auto mb-12 max-w-2xl space-y-4 text-center">
             <p className="text-primary text-sm font-semibold tracking-[0.2em] uppercase">
@@ -41,7 +41,7 @@ export default function Home() {
           </div>
           <CustomClerkPricing />
         </div>
-      </section>
+      </section> */}
       <FAQs />
       <CallToAction />
       <Footer />

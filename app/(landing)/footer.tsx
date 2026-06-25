@@ -5,7 +5,7 @@ const links = [
   { title: "Features", href: "#features" },
   { title: "How it works", href: "#how" },
   { title: "The menu", href: "#showcase" },
-  { title: "Pricing", href: "#pricing" },
+  // { title: "Pricing", href: "#pricing" },
   { title: "Dashboard", href: "/dashboard" },
 ]
 

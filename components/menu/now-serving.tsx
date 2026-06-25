@@ -2,7 +2,6 @@
 
 import Image from "next/image"
 import { motion, useReducedMotion, type Variants } from "framer-motion"
-import { UtensilsCrossed } from "lucide-react"
 
 export type ShowcaseItem = {
   _id: string
@@ -135,9 +134,9 @@ export function NowServing({
                     }
               }
             >
-              <div className="flex flex-col items-center gap-1">
+              <div className="flex flex-col items-center gap-1.5">
                 <span
-                  className="text-xs font-semibold tracking-[0.2em] uppercase"
+                  className="text-lg font-bold tracking-[0.28em] uppercase sm:text-xl"
                   style={{ color: accent }}
                 >
                   {setLabel(index)}
@@ -151,8 +150,8 @@ export function NowServing({
                   {item.description}
                 </p>
               )}
-              <div className="mt-auto w-full overflow-hidden rounded-xl shadow-sm">
-                {item.imageUrl ? (
+              {item.imageUrl && (
+                <div className="mt-auto w-full overflow-hidden rounded-xl shadow-sm">
                   <Image
                     src={item.imageUrl}
                     alt={item.title}
@@ -160,12 +159,8 @@ export function NowServing({
                     height={300}
                     className="aspect-[4/3] w-full object-cover"
                   />
-                ) : (
-                  <div className="bg-muted flex aspect-[4/3] w-full items-center justify-center">
-                    <UtensilsCrossed className="text-muted-foreground/50 size-10" />
-                  </div>
-                )}
-              </div>
+                </div>
+              )}
             </motion.div>
           </motion.article>
         ))}
