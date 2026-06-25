@@ -176,8 +176,8 @@ export default function CalendarPage() {
         ) : (
           <>
             <p className="text-muted-foreground -mt-2 text-xs">
-              Tip: click an hour to add a meal, or drag across hours to set a
-              window (e.g. lunch 12–3pm).
+              Tip: tap an hour to add a meal. On desktop, drag across hours to
+              set a window (e.g. lunch 12–3pm).
             </p>
             <DayCalendar
               meals={dayMeals}

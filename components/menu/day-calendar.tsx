@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import { cn } from "@/lib/utils"
+import { useIsMobile } from "@/hooks/use-mobile"
 
 export type CalendarMeal = {
   _id: string
@@ -64,7 +65,11 @@ export function DayCalendar({
   onEditMeal?: (meal: CalendarMeal) => void
   highlightHour?: number | null
 }) {
+  const isMobile = useIsMobile()
   const canSelect = !!onSelectRange
+  // Drag-to-select is desktop only; on touch it conflicts with scrolling, so
+  // mobile uses a single tap to add a slot instead.
+  const canDrag = canSelect && !isMobile
   const canEdit = !!onEditMeal
   const [drag, setDrag] = useState<{ anchor: number; end: number } | null>(null)
   const dragRef = useRef(drag)
@@ -72,7 +77,7 @@ export function DayCalendar({
 
   // Finalize the selection on pointer release anywhere on the page.
   useEffect(() => {
-    if (!canSelect) return
+    if (!canDrag) return
     const handleUp = () => {
       const current = dragRef.current
       if (current) {
@@ -84,7 +89,7 @@ export function DayCalendar({
     }
     window.addEventListener("pointerup", handleUp)
     return () => window.removeEventListener("pointerup", handleUp)
-  }, [canSelect, onSelectRange])
+  }, [canDrag, onSelectRange])
 
   const { placed, laneCount } = assignLanes(meals)
 
@@ -119,12 +124,18 @@ export function DayCalendar({
                 {formatHour(hour)}
                 {isNow && <span className="text-primary mt-0.5 text-[10px]">now</span>}
               </div>
-              {/* Selection hit area */}
+              {/* Selection hit area. On mobile: tap to add a single slot
+                  (scroll stays enabled). On desktop: click/drag a range. */}
               <div
                 className={cn("flex-1", canSelect && "cursor-pointer")}
-                style={canSelect ? { touchAction: "none" } : undefined}
+                style={canDrag ? { touchAction: "none" } : undefined}
+                onClick={
+                  canSelect && isMobile
+                    ? () => onSelectRange?.(hour, hour)
+                    : undefined
+                }
                 onPointerDown={
-                  canSelect
+                  canDrag
                     ? (e) => {
                         e.preventDefault()
                         setDrag({ anchor: hour, end: hour })
@@ -132,7 +143,7 @@ export function DayCalendar({
                     : undefined
                 }
                 onPointerEnter={
-                  canSelect
+                  canDrag
                     ? () => setDrag((d) => (d ? { ...d, end: hour } : d))
                     : undefined
                 }

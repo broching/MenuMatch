@@ -59,7 +59,7 @@ export function CopyMenuLink({
       ) : (
         <Link2 className="size-4" />
       )}
-      {copied ? "Copied" : label}
+      <span className="hidden sm:inline">{copied ? "Copied" : label}</span>
     </Button>
   )
 }

@@ -69,8 +69,11 @@ export default function MealTypesPage() {
 
       <Card>
         <CardContent>
-          <form onSubmit={handleCreate} className="flex items-end gap-3">
-            <div className="grid flex-1 gap-2">
+          <form
+            onSubmit={handleCreate}
+            className="flex flex-wrap items-end gap-3"
+          >
+            <div className="grid min-w-[12rem] flex-1 gap-2">
               <Label htmlFor="name">New meal type</Label>
               <Input
                 id="name"
