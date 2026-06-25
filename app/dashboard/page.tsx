@@ -12,6 +12,7 @@ import { ExternalLink, Loader2, Plus } from "lucide-react"
 
 import { api } from "@/convex/_generated/api"
 import { Button } from "@/components/ui/button"
+import { CopyMenuLink } from "@/components/copy-menu-link"
 import {
   Card,
   CardContent,
@@ -88,12 +89,15 @@ export default function DashboardPage() {
           </p>
         </div>
         {organization?.slug && (
-          <Button variant="outline" asChild>
-            <Link href={`/menu/${organization.slug}`} target="_blank">
-              <ExternalLink className="mr-1 size-4" />
-              View public page
-            </Link>
-          </Button>
+          <div className="flex flex-wrap items-center gap-2">
+            <CopyMenuLink />
+            <Button variant="outline" asChild>
+              <Link href={`/menu/${organization.slug}`} target="_blank">
+                <ExternalLink className="mr-1 size-4" />
+                View public page
+              </Link>
+            </Button>
+          </div>
         )}
       </div>
 

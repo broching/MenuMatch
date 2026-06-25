@@ -179,3 +179,11 @@
     letter-spacing: var(--tracking-normal);
   }
 }
+
+/* Smooth in-page navigation between sections (disabled when the user
+   prefers reduced motion). */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}

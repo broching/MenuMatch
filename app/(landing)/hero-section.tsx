@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { motion, useReducedMotion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { HeroHeader } from "./header"
 import { Reveal } from "./reveal"
@@ -10,6 +11,7 @@ import { SignUpButton } from "@clerk/nextjs"
 import { UtensilsCrossed, ArrowRight } from "lucide-react"
 
 export default function HeroSection() {
+  const reduce = useReducedMotion()
   return (
     <>
       <HeroHeader />
@@ -67,9 +69,17 @@ export default function HeroSection() {
             </div>
 
             <Reveal delay={0.24} y={32}>
-              <div className="relative mx-auto mt-16 max-w-4xl">
+              <motion.div
+                className="relative mx-auto mt-16 max-w-4xl"
+                animate={reduce ? undefined : { y: [0, -10, 0] }}
+                transition={
+                  reduce
+                    ? undefined
+                    : { duration: 7, repeat: Infinity, ease: "easeInOut" }
+                }
+              >
                 <MenuPreview />
-              </div>
+              </motion.div>
             </Reveal>
           </div>
         </section>

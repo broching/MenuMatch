@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Authenticated, Unauthenticated } from "convex/react"
 import { SignUpButton } from "@clerk/nextjs"
 import { ArrowRight } from "lucide-react"
+import { Reveal } from "./reveal"
 
 export default function CallToAction() {
   return (
@@ -18,7 +19,7 @@ export default function CallToAction() {
           aria-hidden
           className="pointer-events-none absolute -bottom-24 -left-16 size-80 rounded-full bg-black/10 blur-3xl"
         />
-        <div className="relative">
+        <Reveal className="relative">
           <h2 className="text-3xl font-bold tracking-tight text-balance sm:text-4xl md:text-5xl">
             Bring a little calm to your menu.
           </h2>
@@ -44,7 +45,7 @@ export default function CallToAction() {
               </SignUpButton>
             </Unauthenticated>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   )

@@ -63,7 +63,7 @@ export default function FeaturesOne() {
         <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {FEATURES.map((feature, i) => (
             <Reveal key={feature.title} delay={0.05 * (i % 3)} className="h-full">
-              <div className="bg-card border-border h-full rounded-[var(--radius)] border p-7 shadow-sm transition-shadow duration-300 hover:shadow-md">
+              <div className="bg-card border-border h-full rounded-[var(--radius)] border p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
                 <div className="bg-secondary text-primary flex size-12 items-center justify-center rounded-xl">
                   <feature.icon className="size-6" strokeWidth={1.75} />
                 </div>

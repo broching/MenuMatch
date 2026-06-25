@@ -1,4 +1,5 @@
 import { ChevronDown } from "lucide-react"
+import { Reveal } from "./reveal"
 
 const FAQS = [
   {
@@ -27,29 +28,30 @@ export default function FAQs() {
   return (
     <section className="scroll-mt-24 py-24 md:py-32">
       <div className="mx-auto max-w-3xl px-6">
-        <div className="mx-auto mb-12 max-w-2xl text-center">
-          <p className="text-primary text-sm font-semibold tracking-[0.2em] uppercase">
-            Questions
-          </p>
-          <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
-            Everything you might be wondering.
-          </h2>
-        </div>
+        <Reveal>
+          <div className="mx-auto mb-12 max-w-2xl text-center">
+            <p className="text-primary text-sm font-semibold tracking-[0.2em] uppercase">
+              Questions
+            </p>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
+              Everything you might be wondering.
+            </h2>
+          </div>
+        </Reveal>
 
         <div className="flex flex-col gap-3">
-          {FAQS.map((item) => (
-            <details
-              key={item.q}
-              className="group bg-card border-border rounded-[var(--radius)] border p-5 shadow-sm"
-            >
-              <summary className="flex cursor-pointer items-center justify-between gap-4 font-medium [&::-webkit-details-marker]:hidden">
-                {item.q}
-                <ChevronDown className="text-muted-foreground size-5 shrink-0 transition-transform duration-300 group-open:rotate-180" />
-              </summary>
-              <p className="text-muted-foreground mt-4 leading-relaxed">
-                {item.a}
-              </p>
-            </details>
+          {FAQS.map((item, i) => (
+            <Reveal key={item.q} delay={0.05 * i}>
+              <details className="group bg-card border-border rounded-[var(--radius)] border p-5 shadow-sm">
+                <summary className="flex cursor-pointer items-center justify-between gap-4 font-medium [&::-webkit-details-marker]:hidden">
+                  {item.q}
+                  <ChevronDown className="text-muted-foreground size-5 shrink-0 transition-transform duration-300 group-open:rotate-180" />
+                </summary>
+                <p className="text-muted-foreground mt-4 leading-relaxed">
+                  {item.a}
+                </p>
+              </details>
+            </Reveal>
           ))}
         </div>
       </div>

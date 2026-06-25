@@ -112,12 +112,12 @@ export function DayCalendar({
             >
               <div
                 className={cn(
-                  "bg-muted/30 flex w-20 shrink-0 flex-col items-end border-r px-2 py-1 text-right text-xs tabular-nums",
+                  "bg-muted/30 flex w-20 shrink-0 flex-col items-end border-r px-3 pt-1.5 text-right text-xs leading-none tabular-nums",
                   isNow ? "text-primary font-semibold" : "text-muted-foreground",
                 )}
               >
                 {formatHour(hour)}
-                {isNow && <span className="text-primary text-[10px]">now</span>}
+                {isNow && <span className="text-primary mt-0.5 text-[10px]">now</span>}
               </div>
               {/* Selection hit area */}
               <div
@@ -174,12 +174,12 @@ export function DayCalendar({
                 disabled={!canEdit}
                 onClick={() => onEditMeal?.(meal)}
                 className={cn(
-                  "group/meal pointer-events-auto absolute flex w-full min-w-0 flex-col items-start gap-0.5 overflow-hidden rounded-md border border-l-4 pr-2 pl-3 text-left transition-shadow",
-                  span >= 2 ? "py-2" : "py-1",
+                  "group/meal pointer-events-auto absolute flex w-full min-w-0 flex-col items-start gap-0.5 overflow-hidden rounded-md border border-l-4 pr-2 pb-1 pl-3 text-left transition-shadow",
+                  "pt-1.5",
                   canEdit ? "cursor-pointer hover:shadow-md" : "cursor-default",
                 )}
                 style={{
-                  top: meal.startHour * ROW_H + 1,
+                  top: meal.startHour * ROW_H,
                   height: span * ROW_H - 2,
                   left: `calc(${lane * widthPct}% + ${lane === 0 ? 0 : 4}px)`,
                   width: `calc(${widthPct}% - 8px)`,
