@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect, useMemo, useState } from "react"
-import Image from "next/image"
 import { useMutation, useQuery } from "convex/react"
 import { toast } from "sonner"
 import { IconPlus, IconToolsKitchen2 } from "@tabler/icons-react"
@@ -31,6 +30,7 @@ import {
   MenuItemFormDialog,
   type MenuItemForEdit,
 } from "@/components/menu/menu-item-form-dialog"
+import { MenuImage } from "@/components/menu/menu-image"
 import { cn } from "@/lib/utils"
 
 const PAGE_SIZE = 8
@@ -209,12 +209,13 @@ export default function MenusPage() {
             {pageItems.map((item) => (
               <Card key={item._id} className="overflow-hidden pt-0">
                 {item.imageUrl ? (
-                  <Image
+                  <MenuImage
                     src={item.imageUrl}
                     alt={item.title}
                     width={400}
                     height={225}
-                    className="h-40 w-full object-cover"
+                    className="h-40 w-full"
+                    imgClassName="h-40 w-full object-cover"
                   />
                 ) : (
                   <div className="bg-muted flex h-40 w-full items-center justify-center">

@@ -1,7 +1,7 @@
 "use client"
 
-import Image from "next/image"
 import { motion, useReducedMotion, type Variants } from "framer-motion"
+import { MenuImage } from "./menu-image"
 
 export type ShowcaseItem = {
   _id: string
@@ -151,15 +151,14 @@ export function NowServing({
                 </p>
               )}
               {item.imageUrl && (
-                <div className="mt-auto w-full overflow-hidden rounded-xl shadow-sm">
-                  <Image
-                    src={item.imageUrl}
-                    alt={item.title}
-                    width={400}
-                    height={300}
-                    className="aspect-[4/3] w-full object-cover"
-                  />
-                </div>
+                <MenuImage
+                  src={item.imageUrl}
+                  alt={item.title}
+                  width={400}
+                  height={300}
+                  className="mt-auto aspect-[4/3] w-full rounded-xl shadow-sm"
+                  imgClassName="h-full w-full object-cover"
+                />
               )}
             </motion.div>
           </motion.article>
