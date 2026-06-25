@@ -1,57 +1,81 @@
-import { Card } from '@/components/ui/card'
-import { Table } from './table'
-import { CpuArchitecture } from './cpu-architecture'
-import { AnimatedListCustom } from './animated-list-custom'
-  
+"use client"
+
+import {
+  BookOpen,
+  CalendarRange,
+  Clock,
+  LayoutGrid,
+  Users,
+  Share2,
+} from "lucide-react"
+import { Reveal } from "./reveal"
+
+const FEATURES = [
+  {
+    icon: BookOpen,
+    title: "A tidy menu library",
+    body: "Capture every dish once — title, description, photo and meal type — and reuse it across any day.",
+  },
+  {
+    icon: CalendarRange,
+    title: "Drag-to-schedule calendar",
+    body: "Drop meals onto a 24-hour day view or a month overview. Drag across hours to set a window like lunch 12–3.",
+  },
+  {
+    icon: Clock,
+    title: "A menu that knows the time",
+    body: "Your public page always opens on what's being served right now, with up-next just a tap away.",
+  },
+  {
+    icon: LayoutGrid,
+    title: "Sets & custom meal types",
+    body: "Arrange dishes into SET A, B, C and define your own meal types — breakfast, dinner, or a 3pm tea break.",
+  },
+  {
+    icon: Users,
+    title: "Built for your whole team",
+    body: "Organizations, members and roles keep your kitchen and front-of-house working from one shared menu.",
+  },
+  {
+    icon: Share2,
+    title: "Share anywhere",
+    body: "Every organization gets a clean public link — perfect for a website, a QR code on the table, or a screen.",
+  },
+]
 
 export default function FeaturesOne() {
-    return (
-        <section className="py-16 md:py-32">
-            <div className=" py-24">
-                <div className="mx-auto w-full max-w-5xl px-6">
-                    <div className="text-center">
-                        <h2 className="text-foreground text-4xl font-semibold">Effortless Task Management</h2>
-                        <p className="text-muted-foreground mb-12 mt-4 text-balance text-lg">Automate your tasks and workflows by connecting your favorite tools like Notion, Todoist, and more. AI-powered scheduling helps you stay on track and adapt to changing priorities.</p>
-                        <div className="bg-foreground/5 rounded-3xl p-6">
-                            <Table />
-                        </div>
-                    </div>
+  return (
+    <section id="features" className="scroll-mt-24 py-24 md:py-32">
+      <div className="mx-auto max-w-6xl px-6">
+        <div className="mx-auto max-w-2xl text-center">
+          <Reveal>
+            <p className="text-primary text-sm font-semibold tracking-[0.2em] uppercase">
+              Everything in one place
+            </p>
+          </Reveal>
+          <Reveal delay={0.06}>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight text-balance sm:text-4xl">
+              From the kitchen to the table, calmly.
+            </h2>
+          </Reveal>
+        </div>
 
-                    <div className="border-foreground/10 relative mt-16 grid gap-12 border-b pb-12 [--radius:1rem] md:grid-cols-2">
-                        <div>
-                            <h3 className="text-foreground text-xl font-semibold">Marketing Campaigns</h3>
-                            <p className="text-muted-foreground my-4 text-lg">Effortlessly plan and execute your marketing campaigns organized.</p>
-                            <Card
-                                className="aspect-video overflow-hidden px-6">
-                                <Card className="h-full translate-y-6 rounded-b-none border-b-0 bg-muted/50">
-                                    <CpuArchitecture />
-                                </Card>
-                            </Card>
-                        </div>
-                        <div>
-                            <h3 className="text-foreground text-xl font-semibold">AI Meeting Scheduler</h3>
-                            <p className="text-muted-foreground my-4 text-lg">Effortlessly book and manage your meetings. Stay on top of your schedule.</p>
-                            <Card
-                                className="aspect-video overflow-hidden">
-                                <Card className="translate-6 h-full rounded-bl-none border-b-0 border-r-0 bg-muted/50 pt-6 pb-0">
-                                    <AnimatedListCustom />
-                                </Card>
-                            </Card>
-                        </div>
-                    </div>
-
-                    <blockquote className="before:bg-primary relative mt-12 max-w-xl pl-6 before:absolute before:inset-y-0 before:left-0 before:w-1 before:rounded-full">
-                        <p className="text-foreground text-lg">Wow, auto-generated pages are the kind of thing that you don't even know you need until you see it. It's like an AI-native CRM.</p>
-                        <footer className="mt-4 flex items-center gap-2">
-                            <cite>Artem Lazarev</cite>
-                            <span
-                                aria-hidden
-                                className="bg-foreground/15 size-1 rounded-full"></span>
-                            <span className="text-muted-foreground">Creator</span>
-                        </footer>
-                    </blockquote>
+        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {FEATURES.map((feature, i) => (
+            <Reveal key={feature.title} delay={0.05 * (i % 3)} className="h-full">
+              <div className="bg-card border-border h-full rounded-[var(--radius)] border p-7 shadow-sm transition-shadow duration-300 hover:shadow-md">
+                <div className="bg-secondary text-primary flex size-12 items-center justify-center rounded-xl">
+                  <feature.icon className="size-6" strokeWidth={1.75} />
                 </div>
-            </div>
-        </section>
-    )
+                <h3 className="mt-5 text-lg font-semibold">{feature.title}</h3>
+                <p className="text-muted-foreground mt-2 leading-relaxed">
+                  {feature.body}
+                </p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
 }

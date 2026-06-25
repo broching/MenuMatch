@@ -1,5 +1,19 @@
 import { cn } from '@/lib/utils'
 import { SVGProps } from 'react';
+import Image from 'next/image';
+
+export function BrandLogo({ className }: { className?: string }) {
+    return (
+        <Image
+            src="/logo.png"
+            alt="MenuMatch"
+            width={512}
+            height={512}
+            priority
+            className={cn('size-7 rounded-md object-contain', className)}
+        />
+    )
+}
 
 export const Logo = ({ className, uniColor }: { className?: string; uniColor?: boolean }) => {
     return (

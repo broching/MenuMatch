@@ -1,46 +1,58 @@
+import { ChevronDown } from "lucide-react"
+
+const FAQS = [
+  {
+    q: "What is MenuMatch for?",
+    a: "MenuMatch helps restaurants, cafés and canteens build a reusable menu library, schedule meals across the day and week, and share a public page that always shows what's being served right now.",
+  },
+  {
+    q: "Do my guests need an account?",
+    a: "No. Your public menu page is a simple shareable link — guests just open it. Accounts are only for your team members who manage the menu.",
+  },
+  {
+    q: "Can different days have different meals?",
+    a: "Yes. Every day is independent. A day can have breakfast, lunch and dinner, only lunch, or an extra tea break — whatever you schedule on the calendar.",
+  },
+  {
+    q: "How do meal windows work?",
+    a: "On the day view you can click an hour for a single slot, or drag across hours to set a window — for example lunch from 12 to 3 — as a single entry.",
+  },
+  {
+    q: "Can my whole team use it?",
+    a: "Yes. MenuMatch is built around organizations, so you can invite members, manage roles, and everyone works from the same shared menu.",
+  },
+]
+
 export default function FAQs() {
-    return (
-        <section className="scroll-py-16 py-16 md:scroll-py-32 md:py-32">
-            <div className="mx-auto max-w-5xl px-6">
-                <div className="grid gap-y-12 px-2 lg:[grid-template-columns:1fr_auto]">
-                    <div className="text-center lg:text-left">
-                        <h2 className="mb-4 text-3xl font-semibold md:text-4xl">
-                            Frequently <br className="hidden lg:block" /> Asked <br className="hidden lg:block" />
-                            Questions
-                        </h2>
-                        <p>Accusantium quisquam. Illo, omnis?</p>
-                    </div>
+  return (
+    <section className="scroll-mt-24 py-24 md:py-32">
+      <div className="mx-auto max-w-3xl px-6">
+        <div className="mx-auto mb-12 max-w-2xl text-center">
+          <p className="text-primary text-sm font-semibold tracking-[0.2em] uppercase">
+            Questions
+          </p>
+          <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
+            Everything you might be wondering.
+          </h2>
+        </div>
 
-                    <div className="divide-y divide-dashed sm:mx-auto sm:max-w-lg lg:mx-0">
-                        <div className="pb-6">
-                            <h3 className="font-medium">What is the refund policy?</h3>
-                            <p className="text-muted-foreground mt-4">We offer a 30-day money back guarantee. If you are not satisfied with our product, you can request a refund within 30 days of your purchase.</p>
-
-                            <ol className="list-outside list-decimal space-y-2 pl-4">
-                                <li className="text-muted-foreground mt-4">To request a refund, please contact our support team with your order number and reason for the refund.</li>
-                                <li className="text-muted-foreground mt-4">Refunds will be processed within 3-5 business days.</li>
-                                <li className="text-muted-foreground mt-4">Please note that refunds are only available for new customers and are limited to one per customer.</li>
-                            </ol>
-                        </div>
-                        <div className="py-6">
-                            <h3 className="font-medium">How do I cancel my subscription?</h3>
-                            <p className="text-muted-foreground mt-4">You can cancel your subscription at any time by logging into your account and clicking on the cancel button.</p>
-                        </div>
-                        <div className="py-6">
-                            <h3 className="font-medium">Can I upgrade my plan?</h3>
-                            <p className="text-muted-foreground my-4">Yes, you can upgrade your plan at any time by logging into your account and selecting the plan you want to upgrade to.</p>
-                            <ul className="list-outside list-disc space-y-2 pl-4">
-                                <li className="text-muted-foreground">You will be charged the difference in price between your current plan and the plan you are upgrading to.</li>
-                                <li className="text-muted-foreground">Your new plan will take effect immediately and you will be billed at the new rate on your next billing cycle.</li>
-                            </ul>
-                        </div>
-                        <div className="py-6">
-                            <h3 className="font-medium">Do you offer phone support?</h3>
-                            <p className="text-muted-foreground mt-4">We do not offer phone support at this time. However, you can contact us via email or live chat for any questions or concerns you may have.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    )
+        <div className="flex flex-col gap-3">
+          {FAQS.map((item) => (
+            <details
+              key={item.q}
+              className="group bg-card border-border rounded-[var(--radius)] border p-5 shadow-sm"
+            >
+              <summary className="flex cursor-pointer items-center justify-between gap-4 font-medium [&::-webkit-details-marker]:hidden">
+                {item.q}
+                <ChevronDown className="text-muted-foreground size-5 shrink-0 transition-transform duration-300 group-open:rotate-180" />
+              </summary>
+              <p className="text-muted-foreground mt-4 leading-relaxed">
+                {item.a}
+              </p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
 }

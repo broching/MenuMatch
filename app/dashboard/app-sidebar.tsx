@@ -21,7 +21,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import { ChatMaxingIconColoured } from "@/components/logo"
+import { BrandLogo } from "@/components/logo"
 import Link from "next/link"
 
 const data = {
@@ -67,7 +67,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               className="data-[slot=sidebar-menu-button]:!p-1.5"
             >
               <Link href="/">
-                <ChatMaxingIconColoured className="!size-6" />
+                <BrandLogo className="!size-6" />
                 <span className="text-base font-semibold">MenuMatch</span>
               </Link>
             </SidebarMenuButton>
