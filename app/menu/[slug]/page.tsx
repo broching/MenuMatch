@@ -6,6 +6,7 @@ import { Playfair_Display } from "next/font/google"
 import { useParams } from "next/navigation"
 import { useQuery } from "convex/react"
 import { useTheme } from "next-themes"
+import { motion, AnimatePresence } from "framer-motion"
 import {
   CalendarDays,
   ChevronLeft,
@@ -62,6 +63,7 @@ export default function PublicMenuPage() {
   // Hero selection: null = follow the live current time.
   const [selectedDate, setSelectedDate] = useState<string | null>(null)
   const [selectedMealId, setSelectedMealId] = useState<string | null>(null)
+  const [controlsOpen, setControlsOpen] = useState(true)
 
   // Calendar dialog (browsing) state, independent of the hero.
   const [calendarOpen, setCalendarOpen] = useState(false)
@@ -273,38 +275,64 @@ export default function PublicMenuPage() {
             </p>
           </div>
           <div className="flex items-center gap-2">
+            <AnimatePresence initial={false}>
+              {controlsOpen && (
+                <motion.div
+                  key="public-controls"
+                  className="flex items-center gap-2 overflow-hidden"
+                  initial={{ opacity: 0, width: 0 }}
+                  animate={{ opacity: 1, width: "auto" }}
+                  exit={{ opacity: 0, width: 0 }}
+                  transition={{ duration: 0.28, ease: "easeOut" }}
+                >
+                  <Button
+                    variant={isNow ? "outline" : "default"}
+                    size="sm"
+                    onClick={returnToNow}
+                  >
+                    <LocateFixed className="mr-1 size-4" />
+                    Now
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={openCalendar}
+                    aria-label="Open calendar"
+                  >
+                    <CalendarDays className="size-4" />
+                  </Button>
+                  {mounted && (
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      onClick={() =>
+                        setTheme(resolvedTheme === "dark" ? "light" : "dark")
+                      }
+                      aria-label="Toggle dark mode"
+                    >
+                      {resolvedTheme === "dark" ? (
+                        <Sun className="size-4" />
+                      ) : (
+                        <Moon className="size-4" />
+                      )}
+                    </Button>
+                  )}
+                </motion.div>
+              )}
+            </AnimatePresence>
             <Button
-              variant={isNow ? "outline" : "default"}
-              size="sm"
-              onClick={returnToNow}
-            >
-              <LocateFixed className="mr-1 size-4" />
-              Now
-            </Button>
-            <Button
-              variant="outline"
+              variant="ghost"
               size="icon"
-              onClick={openCalendar}
-              aria-label="Open calendar"
+              onClick={() => setControlsOpen((v) => !v)}
+              aria-label={controlsOpen ? "Hide controls" : "Show controls"}
+              aria-expanded={controlsOpen}
             >
-              <CalendarDays className="size-4" />
+              <ChevronRight
+                className={`size-4 transition-transform duration-300 ${
+                  controlsOpen ? "rotate-180" : "rotate-0"
+                }`}
+              />
             </Button>
-            {mounted && (
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={() =>
-                  setTheme(resolvedTheme === "dark" ? "light" : "dark")
-                }
-                aria-label="Toggle dark mode"
-              >
-                {resolvedTheme === "dark" ? (
-                  <Sun className="size-4" />
-                ) : (
-                  <Moon className="size-4" />
-                )}
-              </Button>
-            )}
           </div>
         </header>
 
